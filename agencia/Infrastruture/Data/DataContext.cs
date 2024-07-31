@@ -33,5 +33,7 @@ namespace agencia.Infrastructure.Data
         // Defina suas entidades do banco de dados aqui. Exemplo:
         // public DbSet<YourEntity> YourEntities { get; set; }
         public DbSet<Admin> Administradores { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+
     }
 }
