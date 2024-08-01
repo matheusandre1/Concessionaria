@@ -2,6 +2,7 @@
 using agencia.Domain.Interfaces;
 using agencia.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace agencia.Domain.Services
 {
@@ -14,7 +15,7 @@ namespace agencia.Domain.Services
 
         }
 
-        public List<Vehicle> All(int pagina = 1, string? nome = null, string? marca = null)
+        public List<Vehicle> All(int? pagina = 1, string? nome = null, string? marca = null)
         {
             var query = _context.Vehicles.AsQueryable();
 
@@ -25,7 +26,11 @@ namespace agencia.Domain.Services
             }
 
             int itensPorPagina = 10;
-            query = query.Skip((pagina - 1) * itensPorPagina).Take(itensPorPagina) ;
+            if (pagina != null)
+            {
+                query = query.Skip((int)(pagina - 1) * itensPorPagina).Take(itensPorPagina);
+            }
+           
 
             return query.ToList();
         }

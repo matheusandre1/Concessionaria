@@ -38,7 +38,7 @@ app.MapPost("/admin/login", ([FromBody]LoginDTO loginDTO, IAdminService adminSer
     {
         return Results.Unauthorized();
     }
-});
+}).WithTags("Admin");
 #endregion
 
 #region Vehicles
@@ -58,6 +58,70 @@ app.MapPost("/vehicles", ([FromBody] VehicleDTO vehicleDTO, IVehicleService vehi
 
 });
 #endregion
+
+app.MapGet("/vehicles", ([FromQuery]int? pagina, IVehicleService vehicleServico) =>
+{
+    var vehicle = vehicleServico.All(pagina);
+
+    return Results.Ok(vehicle);
+
+
+
+}).WithTags("Vehicles");
+
+app.MapGet("/vehicles/{id}", ([FromRoute] int id, IVehicleService vehicleServico) =>
+{
+    var vehicle = vehicleServico.FinById(id);
+
+    if (vehicle == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(vehicle);
+
+
+
+}).WithTags("Vehicles");
+
+app.MapPut("/vehicles/{id}", ([FromRoute] int id, VehicleDTO vehicleDTO, IVehicleService vehicleServico) =>
+{
+    var vehicle = vehicleServico.FinById(id);
+
+    if (vehicle == null)
+    {
+        return Results.NotFound();
+    }
+
+    vehicle.Nome = vehicleDTO.Nome;
+    vehicle.Marca = vehicleDTO.Marca;
+    vehicle.Ano = vehicleDTO.Ano;
+
+    vehicleServico.Update(vehicle);
+
+    return Results.Ok(vehicle);
+
+
+
+}).WithTags("Vehicles");
+
+app.MapDelete("/vehicles/{id}", ([FromRoute] int id, IVehicleService vehicleServico) =>
+{
+    var vehicle = vehicleServico.FinById(id);
+
+    if (vehicle == null)
+    {
+        return Results.NotFound();    }
+
+    
+
+    vehicleServico.Delete(vehicle);
+
+    return Results.NoContent();
+
+
+
+}).WithTags("Vehicles");
 app.UseSwagger();
 app.UseSwaggerUI();
 app.Run();

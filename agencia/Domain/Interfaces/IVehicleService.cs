@@ -4,7 +4,7 @@ namespace agencia.Domain.Interfaces
 {
     public interface IVehicleService
     {
-        List<Vehicle> All(int pagina = 1, string? nome = null, string? marca = null);
+        List<Vehicle> All(int? pagina = 1, string? nome = null, string? marca = null);
 
         Vehicle? FinById (int id);
 
