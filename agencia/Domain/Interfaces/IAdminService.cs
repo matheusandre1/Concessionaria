@@ -7,6 +7,10 @@ namespace agencia.Domain.Interfaces
     {
         Admin? Login(LoginDTO loginDTO);
 
+        public Admin? Include(Admin admin);
 
+        List<Admin> BuscaTodos(int? pagina);
+
+        Admin? FinById(int id);
     }
 }
