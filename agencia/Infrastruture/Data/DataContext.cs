@@ -16,7 +16,7 @@ namespace agencia.Infrastructure.Data
                     Id = 1,
                     Email = "administrador@teste.com",
                     Senha = "123456",
-                    Perfil = "Adn"
+                    Perfil = "Adm"
                 }
                 );
                
