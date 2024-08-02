@@ -1,6 +1,6 @@
 ﻿using agencia.Domain.Entities;
 
-namespace Test.Domain
+namespace Test.Domain.Entities
 {
     [TestClass]
     public class AdminstradorTest
@@ -15,7 +15,7 @@ namespace Test.Domain
             admin.Senha = "123456";
             admin.Perfil = "Adm";
 
-            Assert.AreEqual(1,admin.Id);
+            Assert.AreEqual(1, admin.Id);
             Assert.AreEqual("teste@teste.com", admin.Email);
             Assert.AreEqual("123456", admin.Senha);
             Assert.AreEqual("Adm", admin.Perfil);
@@ -23,5 +23,5 @@ namespace Test.Domain
         }
 
     }
-    
+
 }
